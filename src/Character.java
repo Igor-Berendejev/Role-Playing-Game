@@ -5,7 +5,7 @@ public abstract class Character {
     private int skill;
     private int experience;
     private int strength;
-    private final int MAX_HEALTH = 100;
+    public static final int MAX_HEALTH = 100;
 
     public Character(String name, int health, int gold, int skill, int experience, int strength) {
         this.name = name;
@@ -58,5 +58,18 @@ public abstract class Character {
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    public void heal(int hp) { this.health += hp;}
+
+    @Override
+    public String toString() {
+        return "Character " +
+                 name + " has " +
+                " health=" + health +
+                ", gold=" + gold +
+                ", skill=" + skill +
+                ", experience=" + experience +
+                ", strength=" + strength;
     }
 }

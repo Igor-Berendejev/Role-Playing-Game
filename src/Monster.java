@@ -4,6 +4,9 @@ public class Monster extends Character implements Fighter{
         super(name, health, gold, skill, experience, strength);
     }
 
+    // returns the damage caused by this monster attack
+    // that equals to fighter strength
+    // or 0 if the attack was unsuccessful
     @Override
     public int attack(Character character){
         if (getSkill()*3 > Math.random()*100){

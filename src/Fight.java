@@ -10,6 +10,7 @@ public class Fight implements Runnable{
     @Override
     public void run(){
         boolean playerAttack = true;
+        // fight continues until player and monster are alive
         while (!player.isDestroyed() && !monster.isDestroyed()){
             if (playerAttack){
                 System.out.println(player.getName() + " attacked with damage " + player.attack(monster));
