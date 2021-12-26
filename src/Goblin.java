@@ -1,6 +1,6 @@
 public class Goblin extends Monster{
 
     public Goblin(){
-        super("Goblin", 100, 3, 15, 10, 15);
+        super("Goblin", 100, 30, 15, 10, 15);
     }
 }
