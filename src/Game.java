@@ -8,8 +8,7 @@ public class Game implements Runnable {
     public void run(){
         System.out.println("Welcome! Type in your name");
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
-            String playerName = reader.readLine();
-            player = new Player(playerName);
+            player = new Player(reader.readLine());
             String userChoice;
             printMenu();
             // the game continues until exit option is not chosen by player
