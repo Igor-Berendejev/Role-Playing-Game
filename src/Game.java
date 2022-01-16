@@ -7,25 +7,22 @@ public class Game implements Runnable {
 
     public void run(){
         System.out.println("Welcome! Type in your name");
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
-            player = new Player(reader.readLine());
-            String userChoice;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        player = new Player(getInput(reader));
+        boolean isGameOver = false;
+        while (!isGameOver) {
             printMenu();
-            // the game continues until exit option is not chosen by player
-            while (!(userChoice = reader.readLine()).equals("3")) {
-                if (userChoice.equals("1")) medTrader.sell(player);
-                else if (userChoice.equals("2")){
-                    makeFight();
-                    if (player.isDestroyed())break; // end the game if player has 0 HP after the fight
-                }
-                // in case player input does not match menu points
-                else System.out.println("Invalid input");
-                printMenu();
+            String userChoice = getInput(reader);
+            if (userChoice.equals("1")) medTrader.sell(player);
+            else if (userChoice.equals("2")){
+                makeFight();
+                if (player.isDestroyed()) isGameOver = true; // end the game if player has 0 HP after the fight
             }
-            System.out.println("Goodbye!");
-        }catch (IOException e){
-            e.printStackTrace();
+            else if(userChoice.equals("3")) isGameOver = true; // end the game if user chooses Exit option
+            // in case player input does not match menu options
+            else System.out.println("Invalid input");
         }
+        System.out.println("Goodbye!");
     }
 
     private void printMenu(){
@@ -46,5 +43,16 @@ public class Game implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getInput(BufferedReader reader){
+        String input;
+        try{
+            input = reader.readLine();
+        } catch (IOException e){
+            input = "Sorry, could not read your input";
+            e.printStackTrace();
+        }
+        return input;
     }
 }
