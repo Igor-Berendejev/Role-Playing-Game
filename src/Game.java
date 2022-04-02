@@ -1,9 +1,14 @@
 import java.io.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Game implements Runnable {
     private Monster monster;
     private Player player;
     private MedicineTrader medTrader = new MedicineTrader();
+    ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public void run(){
         System.out.println("Welcome! Type in your name");
@@ -16,12 +21,13 @@ public class Game implements Runnable {
             if (userChoice.equals("1")) medTrader.sell(player);
             else if (userChoice.equals("2")){
                 makeFight();
-                if (player.isDestroyed()) isGameOver = true; // end the game if player has 0 HP after the fight
+                if (player.isDestroyed()) {isGameOver = true; executor.shutdown();} // end the game if player has 0 HP after the fight
             }
-            else if(userChoice.equals("3")) isGameOver = true; // end the game if user chooses Exit option
+            else if(userChoice.equals("3")) {isGameOver = true; executor.shutdown();}  // end the game if user chooses Exit option
             // in case player input does not match menu options
             else System.out.println("Invalid input");
         }
+        executor.shutdown();
         System.out.println("Goodbye!");
     }
 
@@ -36,11 +42,13 @@ public class Game implements Runnable {
     private void makeFight(){
         if (Math.random() > 0.5) monster = new Goblin();
         else monster = new Skeleton();
-        Thread fight = new Thread(new Fight(player, monster));
-        fight.start();
+        CallableFight fight = new CallableFight(player,monster);
+        Future<Fighter> result = executor.submit(fight);
         try {
-            fight.join();
+            Fighter winner = result.get();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
     }

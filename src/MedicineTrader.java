@@ -10,6 +10,7 @@ public class MedicineTrader extends Trader{
         if (player.getHealth() == Character.MAX_HEALTH){
             System.out.println("You have maximum HP");
         }
+        else if (player.getGold() < 2) System.out.println("Sorry, you do not have enough money");
         else {
             printMenu();
             try {
