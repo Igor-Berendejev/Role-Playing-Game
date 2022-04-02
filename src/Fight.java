@@ -1,3 +1,6 @@
+import Characters.Monster;
+import Characters.Player;
+
 public class Fight implements Runnable{
     private Player player;
     private Monster monster;

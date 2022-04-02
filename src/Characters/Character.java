@@ -1,3 +1,5 @@
+package Characters;
+
 public abstract class Character {
     private String name;
     private int health;
@@ -64,7 +66,7 @@ public abstract class Character {
 
     @Override
     public String toString() {
-        return "Character " +
+        return "Characters.Character " +
                  name + " has " +
                 " health=" + health +
                 ", gold=" + gold +

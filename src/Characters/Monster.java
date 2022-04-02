@@ -1,3 +1,5 @@
+package Characters;
+
 public class Monster extends Character implements Fighter{
 
     public Monster(String name, int health, int gold, int skill, int experience, int strength){

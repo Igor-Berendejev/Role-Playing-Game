@@ -1,3 +1,5 @@
+import Characters.*;
+
 import java.io.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -37,7 +39,7 @@ public class Game implements Runnable {
         System.out.println("1.To the trader\n2.To the dark forest\n3.Exit");
     }
 
-    // creates a monster (Goblin or Skeleton with 50/ 50 probability) and
+    // creates a monster (Characters.Goblin or Characters.Skeleton with 50/ 50 probability) and
     // starts a fight in separate thread
     private void makeFight(){
         if (Math.random() > 0.5) monster = new Goblin();

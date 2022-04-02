@@ -1,3 +1,7 @@
+import Characters.Fighter;
+import Characters.Monster;
+import Characters.Player;
+
 import java.util.concurrent.Callable;
 
 public class CallableFight implements Callable {

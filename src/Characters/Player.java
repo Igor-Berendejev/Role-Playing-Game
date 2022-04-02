@@ -1,3 +1,5 @@
+package Characters;
+
 public class Player extends Character implements Fighter{
 
     public Player (String name){
