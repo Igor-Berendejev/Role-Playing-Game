@@ -66,7 +66,7 @@ public abstract class Character {
 
     @Override
     public String toString() {
-        return "Characters.Character " +
+        return "Character " +
                  name + " has " +
                 " health=" + health +
                 ", gold=" + gold +
